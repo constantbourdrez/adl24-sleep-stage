@@ -177,6 +177,7 @@ def train_decoder(training_data, valid_data, decoder,encoder, epochs=10, lr=1e-3
         epoch_train_loss = 0.0
         correct = 0
         total = 0
+        softmax = nn.Softmax(dim = 2)
 
         # Training phase
         decoder.train()
@@ -188,6 +189,7 @@ def train_decoder(training_data, valid_data, decoder,encoder, epochs=10, lr=1e-3
             else:
                 inputs, labels = inputs.to(device), labels.to(device)
             encoder_outs = encoder(inputs)
+            encoder_outs = th.argmax(encoder_outs, 1).unsqueeze(2).float()
             preds = decoder(encoder_outs)
             if bestrq:
                 loss = loss_function(preds, labels.long())
@@ -224,6 +226,7 @@ def train_decoder(training_data, valid_data, decoder,encoder, epochs=10, lr=1e-3
                 else:
                     inputs, labels = inputs.to(device), labels.to(device)
                 encoder_outs = encoder(inputs)
+                encoder_outs = th.argmax(encoder_outs, 1).unsqueeze(2).float()
                 preds = decoder(encoder_outs)
                 if bestrq:
                     loss = loss_function(preds, labels.long())
