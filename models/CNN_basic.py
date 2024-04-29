@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
 
-
 ## Classical CNN model
 class SimplifiedCNN(nn.Module):
     def __init__(self, dropout_prob=0.2,channels=1):
