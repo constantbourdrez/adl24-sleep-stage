@@ -4,12 +4,13 @@ import torch.nn as nn
 
 ## Classical CNN model
 class SimplifiedCNN(nn.Module):
-    def __init__(self, dropout_prob=0.25):
+    def __init__(self, dropout_prob=0.2,channels=1):
         super(SimplifiedCNN, self).__init__()
         self.dropout_prob=dropout_prob
+        self.channels=channels
         # Convolutional block
         self.conv_block = nn.Sequential(
-            nn.Conv1d(in_channels=1, out_channels=16, kernel_size=3, stride=1, padding=1),
+            nn.Conv1d(in_channels=self.channels, out_channels=16, kernel_size=3, stride=1, padding=1),
             nn.BatchNorm1d(16),
             nn.ReLU(),
             nn.MaxPool1d(kernel_size=2, stride=2),
