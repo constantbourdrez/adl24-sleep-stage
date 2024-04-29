@@ -2,7 +2,7 @@
 Project for the course "Advanced Deep-Learning", in the 3rd year of ESPCI, 2024.
 
 - The data can be downloaded from [this drive](https://drive.google.com/drive/folders/176qhDmYUDzQg5yrv-IPzkpKSCR3Jv083?usp=sharing).
-- This [notebook](./data_preparation.ipynb) decribes the dataset, provides explanations to the data and how to use and plot them
+- This [notebook](./data_preparation.ipynb) decribes the dataset, provides explanations to the data and how to use and plot them. Moreover, at the end of this ntebook, it is showed how to use a simple CNN to make a first classification.
 
 To better start with, the data are pre-processed. In the directory `5-cassette` you will find the data subsampled at 20 kHZ, segmented in segments of 30s each. It could be easier to start with only the cassette part and then see how telemetry can be included in the study.
 
