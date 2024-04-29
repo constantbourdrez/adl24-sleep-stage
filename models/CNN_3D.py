@@ -1,7 +1,6 @@
 import torch
 import torch.nn as nn
 
-import torch.nn as nn
 
 class SimplifiedCNN_3D(nn.Module):
     def __init__(self, dropout_prob=0.25):
@@ -10,25 +9,20 @@ class SimplifiedCNN_3D(nn.Module):
         
         # Convolutional block
         self.conv_block = nn.Sequential(
-            nn.Conv3d(in_channels=1, out_channels=16, kernel_size=(1, 9, 9), stride=(1, 1, 1), padding=(0, 1, 1)),
+            nn.Conv3d(in_channels=3, out_channels=16, kernel_size=(1, 9, 9), stride=1, padding=1),
             nn.BatchNorm3d(16),
             nn.ReLU(),
-            nn.MaxPool3d(kernel_size=(1, 2, 2), stride=(1, 2, 2)),
+            nn.MaxPool3d(kernel_size=(1, 2, 2), stride=1),
             nn.Dropout(p=self.dropout_prob),
-            nn.Conv3d(in_channels=16, out_channels=32, kernel_size=(1, 9, 9), stride=(1, 1, 1), padding=(0, 1, 1)),
+            nn.Conv3d(in_channels=16, out_channels=32, kernel_size=(1, 9, 9), stride=1, padding=1),
             nn.BatchNorm3d(32),
             nn.ReLU(),
-            nn.MaxPool3d(kernel_size=(1, 4, 4), stride=(1, 2, 2)),
+            nn.MaxPool3d(kernel_size=(1, 4, 4), stride=1),
             nn.Dropout(p=self.dropout_prob),
-            nn.Conv3d(in_channels=32, out_channels=64, kernel_size=(1, 9, 9), stride=(1, 1, 1), padding=(0, 1, 1)),
+            nn.Conv3d(in_channels=32, out_channels=64, kernel_size=(1, 9, 9), stride=1, padding=1),
             nn.BatchNorm3d(64),
             nn.ReLU(),
-            nn.MaxPool3d(kernel_size=(1, 4, 4), stride=(1, 2, 2)),
-            nn.Dropout(p=self.dropout_prob),
-            nn.Conv3d(in_channels=64, out_channels=128, kernel_size=(1, 9, 9), stride=(1, 1, 1), padding=(0, 1, 1)),
-            nn.BatchNorm3d(128),
-            nn.ReLU(),
-            nn.MaxPool3d(kernel_size=(1, 4, 4), stride=(1, 2, 2)),
+            nn.MaxPool3d(kernel_size=(1, 4, 4), stride=1),
             nn.Dropout(p=self.dropout_prob)
         )
         
