@@ -3,10 +3,10 @@ import torch.nn as nn
 
 ## Classical CNN model
 class SimplifiedCNN(nn.Module):
-    def __init__(self, dropout_prob=0.2,channels=1):
+    def __init__(self, dropout_prob=0.2, channels=1):
         super(SimplifiedCNN, self).__init__()
-        self.dropout_prob=dropout_prob
-        self.channels=channels
+        self.dropout_prob = dropout_prob
+        self.channels = channels
         # Convolutional block
         self.conv_block = nn.Sequential(
             nn.Conv1d(in_channels=self.channels, out_channels=16, kernel_size=3, stride=1, padding=1),
@@ -29,10 +29,10 @@ class SimplifiedCNN(nn.Module):
             nn.ReLU(),
             nn.MaxPool1d(kernel_size=4, stride=2),
             nn.Dropout(p=self.dropout_prob)
-            )
+        )
         
-        # Softmax layer
-        self.softmax = nn.Softmax(dim=1)
+        # Linear layer
+        self.fc = nn.Linear(128, 5)
     
     def forward(self, x):
         # Ajouter une dimension de canal
@@ -44,7 +44,8 @@ class SimplifiedCNN(nn.Module):
         # Flatten the output for fully connected layers
         x = x.view(x.size(0), -1)
         
-        # Apply softmax
-        x = self.softmax(x)
+        # Linear layer and softmax
+        x = self.fc(x)
+        x = nn.functional.softmax(x, dim=1)
         
         return x
