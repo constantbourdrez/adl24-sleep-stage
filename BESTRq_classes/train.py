@@ -189,7 +189,7 @@ def train_decoder(training_data, valid_data, decoder,encoder, epochs=10, lr=1e-3
             else:
                 inputs, labels = inputs.to(device), labels.to(device)
             encoder_outs = encoder(inputs)
-            encoder_outs = th.argmax(encoder_outs, 1).unsqueeze(2).float()
+            #encoder_outs = th.argmax(encoder_outs, 1).unsqueeze(2).float()
             preds = decoder(encoder_outs)
             if bestrq:
                 loss = loss_function(preds, labels.long())
@@ -226,14 +226,13 @@ def train_decoder(training_data, valid_data, decoder,encoder, epochs=10, lr=1e-3
                 else:
                     inputs, labels = inputs.to(device), labels.to(device)
                 encoder_outs = encoder(inputs)
-                encoder_outs = th.argmax(encoder_outs, 1).unsqueeze(2).float()
+                #encoder_outs = th.argmax(encoder_outs, 1).unsqueeze(2).float()
                 preds = decoder(encoder_outs)
                 if bestrq:
                     loss = loss_function(preds, labels.long())
                 else:
 
                     loss = loss_function(preds, labels.view(-1))
-                loss.backward()
                 epoch_valid_loss += loss.item()
 
                 # Compute accuracy
