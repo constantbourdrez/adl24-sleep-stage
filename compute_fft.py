@@ -24,8 +24,14 @@ def plot_spectrogram(spectrogram, sample_rate=1, title='Spectrogram', xlabel='Ti
     - xlabel (str): Label for the x-axis.
     - ylabel (str): Label for the y-axis.
     """
+    if not isinstance(spectrogram, np.ndarray):
+        raise ValueError("Input 'spectrogram' must be a numpy array.")
+
+    if spectrogram.ndim != 3:
+        raise ValueError("Input 'spectrogram' must be a 3D tensor.")
+
     # Convert the spectrogram tensor to numpy array
-    spectrogram_np = spectrogram.numpy()
+    spectrogram_np = spectrogram
 
     # Get the number of channels, frequency bins, and time frames
     num_channels, freq_bins, time_frames = spectrogram_np.shape
@@ -40,14 +46,13 @@ def plot_spectrogram(spectrogram, sample_rate=1, title='Spectrogram', xlabel='Ti
     for i in range(num_channels):
         plt.figure(figsize=(10, 6))
         plt.imshow(np.log(spectrogram_np[i] + 1), aspect='auto', origin='lower', cmap='viridis',
-                extent=[time_axis[0], time_axis[-1], freq_axis[0], freq_axis[-1]])
+                   extent=[time_axis[0], time_axis[-1], freq_axis[0], freq_axis[-1]])
         plt.title(f'{title} - Channel {i+1}')
         plt.xlabel(xlabel)
         plt.ylabel(ylabel)
         plt.colorbar(label='Log amplitude')
         plt.tight_layout()
         plt.show()
-    return None
 
 def mask(spectrogram, mask_prob, mask_time, number_of_mask, device, raw_signal):
     # Get the dimensions of the input tensor
