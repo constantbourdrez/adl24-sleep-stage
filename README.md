@@ -2,12 +2,11 @@
 Project for the course "Advanced Deep-Learning", in the 3rd year of ESPCI, 2024.
 
 - The data can be downloaded from [this drive](https://drive.google.com/drive/folders/176qhDmYUDzQg5yrv-IPzkpKSCR3Jv083?usp=sharing).
-- This [notebook](./data_preparation.ipynb) decribes the dataset, provides explanations to the data and how to use and plot them. Moreover, at the end of this ntebook, it is showed how to use a simple CNN to make a first classification.
+- This [notebook](./data_preparation.ipynb) decribes the dataset, provides explanations to the data and how to use and plot them. Moreover, at the end of this notebook, it is showed how to use a simple CNN to make a first classification.
+- You can download the final report of this project following this link : https://dl.espci.fr/ticket/947d5c133b5e0973965d7235a5d881ba
 
-To better start with, the data are pre-processed. In the directory `5-cassette` you will find the data subsampled at 20 kHZ, segmented in segments of 30s each. It could be easier to start with only the cassette part and then see how telemetry can be included in the study.
 
-The possible tasks can be split in different subprojects: what kind of models, of pre-processig, and evaluation of the performances.
-These subprojects are not mutually exclusive and they can be mixed.
+To better start with, the data are pre-processed. In the directory `5-cassette` you will find the data subsampled at 20 kHZ, segmented in segments of 30s each. We use only the cassette part.
 
 ## Fetch data from dvc and GCP initialization
 
@@ -27,7 +26,9 @@ git push
 ```
 
 ## Organization of the repo
+You can find the models for CNN and networks in the corresponding notebooks. 
 
 You can find the models in either 'BESTRq_classes/models.py' or 'models'. The trained models are saved in the models folder. The folder BESTRq_classes contains three python files to make the pretraining of the encoder for the BEST-RQ approach. All the training of this approach is on the 'random_projection_pretraining.ipynb' notebook.
 
 We also made a python file 'compute_fft.py' which aims at computing and ploting the spectrograms along several channels as well as handling the random masking of this spectrograms.
+
